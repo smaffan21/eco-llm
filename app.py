@@ -10,8 +10,23 @@ try:
     from llmlingua import PromptCompressor
     LLMLINGUA_AVAILABLE = True
     print("LLM-Lingua is available")
+    
+    # Try to initialize with LLM-Lingua-2 for better compression
+    try:
+        # Use LLM-Lingua-2 which is 3x-6x faster and better quality
+        LLM_LINGUA_COMPRESSOR = PromptCompressor(
+            model_name="microsoft/llmlingua-2-xlm-roberta-large-meetingbank",
+            use_llmlingua2=True
+        )
+        print("LLM-Lingua-2 initialized successfully")
+    except Exception as e:
+        print(f"LLM-Lingua-2 failed, falling back to LLM-Lingua: {e}")
+        LLM_LINGUA_COMPRESSOR = PromptCompressor()
+        print("Using standard LLM-Lingua")
+        
 except ImportError:
     LLMLINGUA_AVAILABLE = False
+    LLM_LINGUA_COMPRESSOR = None
     print("LLM-Lingua not available, using fallback compression")
 
 # Energy consumption constants (estimates)
@@ -73,7 +88,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             response = {
-                "message": "GreenPromptAI API is running",
+                "message": "Haiat API is running",
                 "llmlingua_available": LLMLINGUA_AVAILABLE
             }
             self.wfile.write(json.dumps(response).encode())
@@ -83,10 +98,20 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.send_cors_headers()
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
+            
+            # Determine which compression method is available
+            compression_info = "None"
+            if LLMLINGUA_AVAILABLE and LLM_LINGUA_COMPRESSOR:
+                if hasattr(LLM_LINGUA_COMPRESSOR, 'use_llmlingua2') and LLM_LINGUA_COMPRESSOR.use_llmlingua2:
+                    compression_info = "LLM-Lingua-2"
+                else:
+                    compression_info = "LLM-Lingua"
+            
             response = {
                 "status": "healthy",
                 "llmlingua_available": LLMLINGUA_AVAILABLE,
-                "compression_methods": ["llmlingua" if LLMLINGUA_AVAILABLE else None, "simple"]
+                "compression_method": compression_info,
+                "compression_methods": [compression_info, "simple"] if LLMLINGUA_AVAILABLE else ["simple"]
             }
             self.wfile.write(json.dumps(response).encode())
 
@@ -121,15 +146,38 @@ class RequestHandler(BaseHTTPRequestHandler):
                 compression_method = "none"
 
                 # Try LLM-Lingua compression if available
-                if LLMLINGUA_AVAILABLE:
+                if LLMLINGUA_AVAILABLE and LLM_LINGUA_COMPRESSOR:
                     try:
-                        compressor = PromptCompressor()
-                        compressed_prompt = compressor.compress_prompt(
-                            original_prompt,
-                            ratio=compression_ratio,
-                            target_token=-1  # Let it decide based on ratio
-                        )
+                        # Calculate compression rate (0.1 = 10% of original, 0.5 = 50% of original)
+                        compression_rate = 1.0 / compression_ratio
+                        
+                        # Use LLM-Lingua with proper API
+                        if hasattr(LLM_LINGUA_COMPRESSOR, 'use_llmlingua2') and LLM_LINGUA_COMPRESSOR.use_llmlingua2:
+                            # LLM-Lingua-2 API
+                            result = LLM_LINGUA_COMPRESSOR.compress_prompt(
+                                original_prompt, 
+                                rate=compression_rate,
+                                force_tokens=['\n', '?', '!', '.']  # Preserve important punctuation
+                            )
+                        else:
+                            # Standard LLM-Lingua API
+                            target_tokens = max(50, int(len(original_prompt.split()) / compression_ratio))
+                            result = LLM_LINGUA_COMPRESSOR.compress_prompt(
+                                original_prompt,
+                                instruction="",
+                                question="",
+                                target_token=target_tokens
+                            )
+                        
+                        # Extract compressed prompt from result
+                        if isinstance(result, dict) and 'compressed_prompt' in result:
+                            compressed_prompt = result['compressed_prompt']
+                        else:
+                            compressed_prompt = result
+                            
                         compression_method = "llmlingua"
+                        print(f"LLM-Lingua compressed: {len(original_prompt.split())} -> {len(compressed_prompt.split())} words")
+                        
                     except Exception as e:
                         print(f"LLM-Lingua compression failed: {e}")
                         # Fall back to simple compression
@@ -184,7 +232,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 def run_server(port=8000):
     server_address = ('', port)
     httpd = HTTPServer(server_address, RequestHandler)
-    print(f"GreenPromptAI server running on port {port}")
+    print(f"Haiat server running on port {port}")
     httpd.serve_forever()
 
 if __name__ == "__main__":
