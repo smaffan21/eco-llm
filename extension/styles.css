@@ -1,25 +1,26 @@
 /* GreenPromptAI Extension Styles */
 
 .greenpromptai-btn {
-  background: linear-gradient(45deg, #4caf50, #66bb6a);
+  background: linear-gradient(45deg, #1976d2, #2196f3);
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 500;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   margin-left: 8px;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.2);
 }
 
 .greenpromptai-btn:hover {
-  background: linear-gradient(45deg, #45a049, #5cb860);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+  background: linear-gradient(45deg, #1565c0, #1976d2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
 }
 
 .greenpromptai-btn:disabled {
@@ -74,9 +75,10 @@
 
 .greenpromptai-modal-header h3 {
   margin: 0;
-  color: #2e7d32;
-  font-size: 18px;
-  font-weight: 600;
+  color: #1976d2;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .greenpromptai-close {
@@ -110,10 +112,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border-left: 4px solid #4caf50;
+  padding: 16px;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border-radius: 12px;
+  border-left: 4px solid #1976d2;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.1);
 }
 
 .greenpromptai-metric .label {
@@ -128,7 +131,7 @@
 }
 
 .greenpromptai-metric .value.compression {
-  color: #4caf50;
+  color: #1976d2;
 }
 
 .greenpromptai-metric .value.savings {
@@ -150,8 +153,8 @@
 }
 
 .greenpromptai-compressed {
-  border-color: #4caf50;
-  background: #f1f8e9;
+  border-color: #1976d2;
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
 }
 
 .greenpromptai-original h4,
@@ -166,7 +169,7 @@
 }
 
 .greenpromptai-compressed h4 {
-  color: #2e7d32;
+  color: #1976d2;
 }
 
 .greenpromptai-original p,
@@ -196,14 +199,14 @@
 }
 
 .greenpromptai-btn-primary {
-  background: linear-gradient(45deg, #4caf50, #66bb6a);
+  background: linear-gradient(45deg, #1976d2, #2196f3);
   color: white;
 }
 
 .greenpromptai-btn-primary:hover {
-  background: linear-gradient(45deg, #45a049, #5cb860);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  background: linear-gradient(45deg, #1565c0, #1976d2);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(25, 118, 210, 0.4);
 }
 
 .greenpromptai-btn-secondary {

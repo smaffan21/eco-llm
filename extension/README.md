@@ -1,4 +1,4 @@
-# GreenPromptAI Browser Extension
+# Haiat Browser Extension
 
 ## 🚀 Quick Setup & Testing
 
@@ -16,14 +16,14 @@ python app.py
 ### 3. **Test the Extension**
 1. Go to ChatGPT, Claude, or any AI chat site
 2. Type a long prompt (50+ characters)
-3. Click the "🌱 Compress" button that appears
-4. See compression results and energy savings!
+3. Click the "⚡ Compress" button that appears
+4. See compression results and efficiency metrics!
 
 ## 🎯 How It Works
 
 - **Auto-Detection**: Finds prompt input fields on AI chat sites
 - **One-Click Compression**: Compress prompts with a single button click
-- **Visual Results**: Shows before/after comparison and environmental impact
+- **Visual Results**: Shows before/after comparison and efficiency impact
 - **Smart Fallback**: Works even if LLM-Lingua isn't available
 
 ## 🔧 Supported Sites
@@ -35,5 +35,5 @@ python app.py
 ## 📊 Features
 - Real-time compression with your backend API
 - Token and energy savings tracking
-- Beautiful modal with compression results
+- Modern blue UI with compression results
 - Extension popup with stats and testing

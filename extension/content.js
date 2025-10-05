@@ -57,8 +57,8 @@ class PromptCompressor {
 
     const button = document.createElement('button');
     button.className = 'greenpromptai-btn';
-    button.innerHTML = '🌱 Compress';
-    button.title = 'Compress prompt to save tokens and energy';
+    button.innerHTML = '⚡ Compress';
+    button.title = 'Compress prompt for efficient AI interaction';
     
     button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -128,7 +128,7 @@ class PromptCompressor {
         button.innerHTML = '⏳ Compressing...';
         button.disabled = true;
       } else {
-        button.innerHTML = '🌱 Compress';
+        button.innerHTML = '⚡ Compress';
         button.disabled = false;
       }
     }
@@ -140,7 +140,7 @@ class PromptCompressor {
     modal.innerHTML = `
       <div class="greenpromptai-modal-content">
         <div class="greenpromptai-modal-header">
-          <h3>🌱 Compression Results</h3>
+          <h3>⚡ Compression Results</h3>
           <button class="greenpromptai-close">&times;</button>
         </div>
         <div class="greenpromptai-results">

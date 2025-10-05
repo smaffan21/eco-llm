@@ -25,28 +25,71 @@ import {
 import axios from 'axios';
 import { CompressionResponse, HealthResponse } from './types';
 
-// Create green theme
+// Create modern blue theme
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4caf50',
+      main: '#1976d2',
+      light: '#42a5f5',
+      dark: '#1565c0',
     },
     secondary: {
-      main: '#66bb6a',
+      main: '#2196f3',
+      light: '#64b5f6',
+      dark: '#1976d2',
     },
     success: {
       main: '#4caf50',
     },
+    background: {
+      default: '#f8fafc',
+      paper: '#ffffff',
+    },
   },
   typography: {
     h4: {
-      fontWeight: 600,
-      color: '#2e7d32',
+      fontWeight: 700,
+      color: '#1e293b',
+      letterSpacing: '-0.02em',
     },
     h6: {
-      fontWeight: 500,
+      fontWeight: 600,
+      color: '#475569',
+    },
+    body1: {
+      color: '#64748b',
     },
   },
+  shape: {
+    borderRadius: 12,
+  },
+  shadows: [
+    'none',
+    '0px 1px 3px rgba(0, 0, 0, 0.1)',
+    '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    '0px 10px 15px rgba(0, 0, 0, 0.1)',
+    '0px 20px 25px rgba(0, 0, 0, 0.1)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+    '0px 25px 50px rgba(0, 0, 0, 0.25)',
+  ],
 });
 
 const API_BASE_URL = 'http://localhost:8000';
@@ -103,10 +146,10 @@ function App() {
       <Container maxWidth="lg" sx={{ py: 4 }}>
         <Box textAlign="center" mb={4}>
           <Typography variant="h4" component="h1" gutterBottom>
-            🌱 GreenPromptAI
+            ⚡ Haiat
           </Typography>
           <Typography variant="h6" color="text.secondary">
-            Compress your prompts and save the planet
+            Smart prompt compression for efficient AI interactions
           </Typography>
         </Box>
 
@@ -115,7 +158,7 @@ function App() {
             <Chip
               icon={<EcoIcon />}
               label={`Status: ${health.status}`}
-              color="success"
+              color="primary"
               variant="outlined"
             />
             <Chip
@@ -151,10 +194,14 @@ function App() {
                 sx={{
                   px: 4,
                   py: 1.5,
-                  background: 'linear-gradient(45deg, #4caf50 30%, #66bb6a 90%)',
+                  background: 'linear-gradient(45deg, #1976d2 30%, #2196f3 90%)',
+                  boxShadow: '0 4px 14px rgba(25, 118, 210, 0.3)',
                   '&:hover': {
-                    background: 'linear-gradient(45deg, #45a049 30%, #5cb860 90%)',
-                  }
+                    background: 'linear-gradient(45deg, #1565c0 30%, #1976d2 90%)',
+                    boxShadow: '0 6px 20px rgba(25, 118, 210, 0.4)',
+                    transform: 'translateY(-2px)',
+                  },
+                  transition: 'all 0.3s ease',
                 }}
               >
                 {loading ? 'Compressing...' : 'Compress Prompt'}
@@ -197,14 +244,14 @@ function App() {
             </Grid>
 
             <Grid item xs={12} md={6}>
-              <Card sx={{ border: '2px solid', borderColor: 'success.main' }}>
+              <Card sx={{ border: '2px solid', borderColor: 'primary.main', boxShadow: '0 8px 32px rgba(25, 118, 210, 0.1)' }}>
                 <CardContent>
-                  <Typography variant="h6" gutterBottom sx={{ color: 'success.main' }}>
+                  <Typography variant="h6" gutterBottom sx={{ color: 'primary.main' }}>
                     Compressed Prompt
                   </Typography>
                   <Typography variant="body2" sx={{
                     p: 2,
-                    bgcolor: 'success.50',
+                    bgcolor: 'primary.50',
                     borderRadius: 1,
                     maxHeight: 200,
                     overflow: 'auto'
@@ -212,7 +259,7 @@ function App() {
                     {result.compressed_prompt}
                   </Typography>
                   <Box mt={2}>
-                    <Typography variant="body2" color="success.main">
+                    <Typography variant="body2" color="primary.main">
                       Tokens: {result.compressed_tokens}
                     </Typography>
                   </Box>
@@ -222,36 +269,54 @@ function App() {
 
             {/* Metrics */}
             <Grid item xs={12} md={4}>
-              <Paper sx={{ p: 3, textAlign: 'center', bgcolor: 'success.50' }}>
-                <SpeedIcon sx={{ fontSize: 48, color: 'success.main', mb: 1 }} />
+              <Paper sx={{ 
+                p: 3, 
+                textAlign: 'center', 
+                bgcolor: 'primary.50',
+                boxShadow: '0 4px 20px rgba(25, 118, 210, 0.1)',
+                border: '1px solid rgba(25, 118, 210, 0.1)'
+              }}>
+                <SpeedIcon sx={{ fontSize: 48, color: 'primary.main', mb: 1 }} />
                 <Typography variant="h6" gutterBottom>
                   Compression Ratio
                 </Typography>
-                <Typography variant="h4" color="success.main" fontWeight="bold">
+                <Typography variant="h4" color="primary.main" fontWeight="bold">
                   {result.compression_ratio}x
                 </Typography>
               </Paper>
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <Paper sx={{ p: 3, textAlign: 'center', bgcolor: 'primary.50' }}>
-                <EnergyIcon sx={{ fontSize: 48, color: 'primary.main', mb: 1 }} />
+              <Paper sx={{ 
+                p: 3, 
+                textAlign: 'center', 
+                bgcolor: 'secondary.50',
+                boxShadow: '0 4px 20px rgba(33, 150, 243, 0.1)',
+                border: '1px solid rgba(33, 150, 243, 0.1)'
+              }}>
+                <EnergyIcon sx={{ fontSize: 48, color: 'secondary.main', mb: 1 }} />
                 <Typography variant="h6" gutterBottom>
                   Energy Saved
                 </Typography>
-                <Typography variant="h4" color="primary.main" fontWeight="bold">
+                <Typography variant="h4" color="secondary.main" fontWeight="bold">
                   {result.energy_saved_kwh.toFixed(6)} kWh
                 </Typography>
               </Paper>
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <Paper sx={{ p: 3, textAlign: 'center', bgcolor: 'secondary.50' }}>
-                <Co2Icon sx={{ fontSize: 48, color: 'secondary.main', mb: 1 }} />
+              <Paper sx={{ 
+                p: 3, 
+                textAlign: 'center', 
+                bgcolor: 'success.50',
+                boxShadow: '0 4px 20px rgba(76, 175, 80, 0.1)',
+                border: '1px solid rgba(76, 175, 80, 0.1)'
+              }}>
+                <Co2Icon sx={{ fontSize: 48, color: 'success.main', mb: 1 }} />
                 <Typography variant="h6" gutterBottom>
                   CO₂ Saved
                 </Typography>
-                <Typography variant="h4" color="secondary.main" fontWeight="bold">
+                <Typography variant="h4" color="success.main" fontWeight="bold">
                   {result.co2_saved_kg.toFixed(6)} kg
                 </Typography>
               </Paper>
@@ -267,7 +332,7 @@ function App() {
                   <Box mb={3}>
                     <Box display="flex" justifyContent="space-between" mb={1}>
                       <Typography variant="body2">Tokens Saved</Typography>
-                      <Typography variant="body2" color="success.main">
+                      <Typography variant="body2" color="primary.main">
                         {result.tokens_saved} tokens
                       </Typography>
                     </Box>
@@ -278,7 +343,7 @@ function App() {
                         height: 10,
                         borderRadius: 5,
                         '& .MuiLinearProgress-bar': {
-                          backgroundColor: 'success.main',
+                          backgroundColor: 'primary.main',
                         }
                       }}
                     />
@@ -331,7 +396,7 @@ function App() {
 
         <Box mt={4} textAlign="center">
           <Typography variant="body2" color="text.secondary">
-            🌍 Every compressed token helps reduce carbon emissions
+            ⚡ Every compressed token optimizes AI efficiency
           </Typography>
         </Box>
       </Container>

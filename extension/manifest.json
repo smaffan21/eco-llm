@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "GreenPromptAI",
+  "name": "Haiat",
   "version": "1.0.0",
-  "description": "Compress prompts and save energy while using AI tools",
+  "description": "Smart prompt compression for efficient AI interactions",
   "permissions": [
     "activeTab",
     "storage"
@@ -24,6 +24,6 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "GreenPromptAI"
+    "default_title": "Haiat"
   }
 }
