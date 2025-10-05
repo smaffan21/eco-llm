@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "GreenPromptAI",
+  "version": "1.0.0",
+  "description": "Compress prompts and save energy while using AI tools",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "http://localhost:8000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://chat.openai.com/*",
+        "*://claude.ai/*",
+        "*://bard.google.com/*",
+        "*://www.perplexity.ai/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "GreenPromptAI"
+  }
+}
