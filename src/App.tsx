@@ -87,8 +87,8 @@ const DEMO_SAMPLES: Array<{ label: string; data: CompressionResponse }> = [
 const TEAM: Array<{ name: string; url: string; photo: string }> = [
   { name: 'Maria Latifa Benkhelifa', url: 'http://www.linkedin.com/in/maria-latifa-benkhelifa', photo: '/Maria.jpg' },
   { name: 'Aditya Chatterjee', url: 'https://www.linkedin.com/in/acditya/', photo: '/Aditya.jpg' },
-  { name: 'Syed M Affan', url: 'https://www.linkedin.com/in/syed-m-affan/', photo: '/Syed.jpg' },
-  { name: 'Sultan M Alshehhi', url: 'https://www.linkedin.com/in/sultan-m-alshehhi/', photo: '/Sultan.jpg' },
+  { name: 'Syed M Affan', url: 'https://www.linkedin.com/in/syed-m-affan/', photo: '/Syed.png' },
+  { name: 'Sultan M Alshehhi', url: 'https://www.linkedin.com/in/sultan-m-alshehhi/', photo: '/Sultan.png' },
   { name: 'Bdour Babillie', url: 'https://www.linkedin.com/in/bdourbabillie/', photo: '/Bdour.jpg' }
 ].sort((a, b) => a.name.localeCompare(b.name));
 
