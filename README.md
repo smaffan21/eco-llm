@@ -1,4 +1,4 @@
-# GreenPromptAI 🌱
+# ECO-LLM 🌱
 
 A tool that compresses text prompts using LLM-Lingua or similar algorithms, then calculates token savings and estimates carbon emission reduction.
 
@@ -69,7 +69,3 @@ The app estimates:
 
 - **LLM-Lingua**: Advanced compression using large language models (when available)
 - **Simple Compression**: Fallback method using sentence-based truncation
-
-## Contributing
-
-Feel free to contribute improvements to the compression algorithms or UI design!
